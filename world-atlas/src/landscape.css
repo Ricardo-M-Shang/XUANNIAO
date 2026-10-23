@@ -1,0 +1,788 @@
+/* Landscape edition: small scenes, cartographic navigation, and light studies. */
+.view-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+.lighting-switch {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: #f6f7e9d9;
+  border: 1px solid #fff9;
+  border-radius: 4px;
+}
+.lighting-switch button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 26px;
+  border-radius: 3px;
+  color: #879779;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.lighting-switch button.active {
+  background: #dde6d2;
+  color: #4d704f;
+}
+.lighting-switch button:hover {
+  background: #e5ebd9;
+}
+.scenic-collection {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.scenic-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 13px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #6f8465;
+}
+.scenic-heading small {
+  font-size: 6px;
+  letter-spacing: 1.5px;
+  color: #a0ab92;
+  margin-left: 7px;
+}
+.scenic-heading button {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  color: #7a8e6e;
+}
+.scenic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.scenic-grid > button {
+  padding: 0 0 9px;
+  text-align: left;
+  background: #eff1e5;
+  border: 1px solid #e0e5d5;
+  border-radius: 3px;
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.scenic-grid > button:hover {
+  border-color: #96aa83;
+  transform: translateY(-2px);
+}
+.landscape-art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.scenic-grid > button > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 9px 0;
+  font-family: var(--serif);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #526b49;
+}
+.scenic-grid > button > small {
+  display: block;
+  padding: 5px 9px 0;
+  font-size: 7px;
+  color: #9da78d;
+  letter-spacing: 0.5px;
+}
+.scenic-collection > p {
+  font-size: 8px;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  color: #a0aa91;
+  margin: 11px 0 0;
+}
+.minimap {
+  position: absolute;
+  left: 29px;
+  bottom: 127px;
+  width: 153px;
+  padding: 9px 9px 6px;
+  border: 1px solid #f7f8eeb3;
+  background: #f3f6e5b8;
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+  z-index: 5;
+  box-shadow: 0 3px 15px #38574409;
+}
+.minimap-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #728b65;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-bottom: 7px;
+}
+.minimap-title svg {
+  opacity: 0.65;
+}
+.minimap > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  border-radius: 2px;
+  touch-action: manipulation;
+}
+.minimap-hint {
+  display: block;
+  font-size: 6px;
+  letter-spacing: 0.7px;
+  color: #99a68b;
+  text-align: center;
+  margin-top: 5px;
+}
+.motion-toggle {
+  position: absolute;
+  right: 26px;
+  bottom: 28px;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6e8d72;
+  font-size: 8px;
+  letter-spacing: 1px;
+  padding: 6px 8px;
+  border: 1px solid #f4f6df66;
+  background: #edf2df69;
+  border-radius: 3px;
+}
+.motion-toggle:hover {
+  background: #eff3e1d4;
+}
+.motion-toggle.paused {
+  color: #a28a5f;
+}
+.map-caption {
+  display: none;
+}
+.closeup-location {
+  position: absolute;
+  top: 78px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border: 1px solid #fffff599;
+  background: #f1f4e4db;
+  backdrop-filter: blur(7px);
+  border-radius: 3px;
+  color: #889b79;
+  z-index: 5;
+  box-shadow: 0 4px 20px #38574409;
+  font-size: 8px;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.closeup-location strong {
+  font-family: var(--serif);
+  color: #506e46;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+.closeup-location button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-left: 1px solid #d8e0cb;
+  padding-left: 12px;
+  color: #819873;
+  font-size: 8px;
+}
+.inspecting .map-heading {
+  opacity: 0.58;
+  transition: opacity 0.3s;
+}
+.inspecting .map-heading h2 {
+  font-size: 24px;
+  letter-spacing: 5px;
+}
+.inspecting .map-heading > p {
+  display: none;
+}
+.enriched-card {
+  top: 169px;
+  width: 302px;
+  max-height: calc(100% - 235px);
+  background: #f7f8edf5;
+  border-color: #fff9;
+}
+.place-visual {
+  position: relative;
+  overflow: hidden;
+  height: 156px;
+  background: #d2deca;
+}
+.place-visual > .landscape-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.place-visual > .place-card-meta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 13px 15px;
+  background: linear-gradient(#f7f8e6bb, transparent);
+}
+.place-visual .place-card-meta > span {
+  color: #687f5c;
+  font-size: 7px;
+}
+.place-visual .card-icon {
+  color: #6f875e;
+}
+.visual-edition {
+  position: absolute;
+  bottom: 9px;
+  left: 14px;
+  color: #5c7b5c;
+  font-size: 6px;
+  letter-spacing: 1.2px;
+  text-shadow: 0 1px 3px #f4f3da;
+}
+.visual-edition span {
+  margin: 0 4px;
+}
+.enriched-card .place-card-content {
+  padding: 17px 19px 0;
+}
+.place-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.place-title-row h3 {
+  margin: 6px 0 7px;
+  font-size: 25px;
+  letter-spacing: 3px;
+}
+.enriched-card .detail-subtitle {
+  font-size: 8px;
+  color: #9aa68a;
+  letter-spacing: 0.6px;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+.detail-seal {
+  writing-mode: vertical-rl;
+  border: 1px solid #b6ac83;
+  padding: 4px 2px 3px;
+  font-family: var(--serif);
+  color: #a4966e;
+  font-size: 8px;
+  letter-spacing: 2px;
+  line-height: 1.3;
+}
+.landscape-feature-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.landscape-feature-tags > span {
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: 0.4px;
+  color: #7d936e;
+  background: #e8eedd;
+  padding: 4px 6px;
+  border: 1px solid #dfe6d2;
+  border-radius: 2px;
+}
+.inspect-place-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 9px;
+  letter-spacing: 0.6px;
+  padding: 11px;
+  background: #426b50;
+  color: #f2f2d9;
+  border: 1px solid #466c4c;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+.inspect-place-button:hover {
+  background: #305940;
+}
+.inspect-place-button > span {
+  flex: 1;
+  text-align: left;
+}
+.inspect-place-button.active {
+  background: #e5eddb;
+  border-color: #c4d2b6;
+  color: #648456;
+}
+.landscape-heading {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #637e53;
+  margin: 20px 0 10px;
+}
+.enriched-card .place-card-content > p:not(.detail-subtitle) {
+  font-size: 9px;
+  line-height: 2;
+  color: #89977b;
+  margin-bottom: 12px;
+}
+.landscape-note {
+  border-left: 2px solid #d3dcc6;
+  padding: 6px 0 6px 9px;
+  margin: 13px 0;
+  color: #9caa8b;
+}
+.landscape-note > summary {
+  font-size: 7px;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  list-style-position: inside;
+}
+.landscape-note > p {
+  font-size: 8px;
+  line-height: 1.9;
+  color: #98a58a;
+  margin: 8px 0 2px;
+  letter-spacing: 0.4px;
+}
+.enriched-card .related-places {
+  margin-top: 14px;
+  padding-top: 12px;
+}
+.enriched-card .card-bottom {
+  margin-top: 14px;
+}
+.layer-panel {
+  max-height: calc(100% - 155px);
+  overflow: auto;
+}
+.layer-option {
+  padding: 10px 0;
+}
+.layer-option small {
+  font-size: 7px;
+}
+.layer-panel .layer-note {
+  font-size: 7px;
+  line-height: 1.8;
+}
+
+.lighting-dusk .map-vignette {
+  background: radial-gradient(
+    ellipse at 45% 45%,
+    transparent 35%,
+    #d8b68d22 100%
+  );
+}
+.lighting-night .map-vignette {
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    transparent 30%,
+    #132a484d 100%
+  );
+  box-shadow: inset 0 0 90px #0c253b20;
+}
+.lighting-night .map-grain {
+  opacity: 0.025;
+}
+.lighting-night .map-heading h2 {
+  color: #d0d4bb;
+}
+.lighting-night .map-kicker,
+.lighting-night .map-heading p {
+  color: #91afad;
+}
+.lighting-night .map-location,
+.lighting-night .map-location > span:last-child {
+  color: #a4beb6;
+}
+.lighting-night .map-compass {
+  color: #9ebbb3;
+}
+.lighting-night .region-name {
+  color: #cbd4bc;
+  text-shadow:
+    0 1px 5px #183747,
+    0 0 8px #18374766;
+}
+.lighting-night .region-en {
+  color: #99b7ab;
+  text-shadow: 0 1px 3px #173747;
+}
+.lighting-night .sea-label .region-name {
+  color: #8db5b2;
+  text-shadow: 0 1px 7px #163a4a;
+}
+.lighting-night .sea-label .region-en {
+  color: #72989e;
+}
+.lighting-night .place-name {
+  color: #d7dfc9;
+  text-shadow:
+    0 0 4px #17333d,
+    0 0 6px #17333d,
+    0 0 3px #17333d;
+}
+.lighting-night .place-pin {
+  color: #bdcdb5;
+  background: #344f56ed;
+  border-color: #8ca89a85;
+}
+.lighting-night .selected .place-name {
+  color: #405f4a;
+  text-shadow: none;
+}
+.lighting-night .selected .place-pin {
+  color: #fff0be;
+  background: #84784e;
+  border-color: #baa773;
+}
+.lighting-night .map-scale,
+.lighting-night .map-interaction-hint {
+  color: #91b0a4;
+}
+.lighting-night .motion-toggle {
+  background: #34505ca3;
+  border-color: #9bb6a22b;
+  color: #b8cbbc;
+}
+.lighting-night .minimap {
+  background: #e2ead9a6;
+  border-color: #cfe0cd70;
+}
+.lighting-night .closeup-location {
+  background: #dfe9dbdc;
+}
+.lighting-night .title-seal {
+  color: #c9b784;
+  border-color: #a29367;
+}
+@media (min-width: 761px) and (min-height: 850px) {
+  .region-row {
+    padding: 8px 7px;
+  }
+  .region-art {
+    width: 48px;
+    height: 43px;
+  }
+  .scenic-collection {
+    margin-top: 18px;
+    padding-top: 17px;
+  }
+  .scenic-heading {
+    margin-bottom: 11px;
+  }
+}
+@media (min-width: 1600px) {
+  .enriched-card {
+    width: 327px;
+    top: 185px;
+  }
+  .place-visual {
+    height: 174px;
+  }
+  .minimap {
+    width: 171px;
+    left: 37px;
+    bottom: 133px;
+  }
+  .scenic-grid > button > span {
+    font-size: 12px;
+  }
+}
+@media (max-height: 760px) and (min-width: 761px) {
+  .enriched-card {
+    top: 143px;
+    max-height: calc(100% - 209px);
+  }
+  .place-visual {
+    height: 117px;
+  }
+  .enriched-card .place-card-content {
+    padding-top: 14px;
+  }
+  .place-title-row h3 {
+    font-size: 22px;
+  }
+  .scenic-collection {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+  .minimap {
+    bottom: 121px;
+    width: 130px;
+  }
+  .closeup-location {
+    top: 66px;
+  }
+  .closeup-location strong {
+    font-size: 10px;
+  }
+}
+@media (max-width: 1200px) {
+  .enriched-card {
+    width: 270px;
+    right: 77px;
+  }
+  .minimap {
+    width: 134px;
+    left: 24px;
+  }
+  .scenic-heading small {
+    display: none;
+  }
+  .scenic-grid {
+    gap: 7px;
+  }
+  .view-tools {
+    gap: 7px;
+  }
+  .lighting-switch button {
+    width: 24px;
+  }
+  .closeup-location {
+    left: 53%;
+  }
+}
+@media (max-width: 960px) {
+  .enriched-card {
+    width: 249px;
+    right: 64px;
+  }
+  .minimap {
+    width: 116px;
+    left: 20px;
+    bottom: 121px;
+  }
+  .minimap-hint {
+    display: none;
+  }
+  .scenic-grid > button > span {
+    font-size: 9px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .scenic-grid > button > small {
+    font-size: 6px;
+    padding-left: 7px;
+  }
+  .lighting-switch {
+    padding: 3px;
+  }
+  .lighting-switch button {
+    width: 23px;
+    height: 24px;
+  }
+  .closeup-location {
+    top: 72px;
+    font-size: 7px;
+    padding: 8px 10px;
+    gap: 7px;
+  }
+  .closeup-location strong {
+    font-size: 10px;
+  }
+  .closeup-location button {
+    font-size: 7px;
+  }
+  .motion-toggle > span {
+    display: none;
+  }
+  .motion-toggle {
+    padding: 6px;
+  }
+  .enriched-card .place-card-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .place-title-row h3 {
+    font-size: 22px;
+  }
+  .landscape-feature-tags {
+    gap: 4px;
+  }
+  .landscape-feature-tags > span {
+    font-size: 6px;
+    padding: 4px 5px;
+  }
+  .inspect-place-button {
+    font-size: 8px;
+    padding: 10px;
+  }
+  .place-visual {
+    height: 137px;
+  }
+}
+@media (max-width: 760px) {
+  .view-tools {
+    gap: 5px;
+  }
+  .lighting-switch {
+    padding: 2px;
+    gap: 0;
+  }
+  .lighting-switch button {
+    width: 23px;
+    height: 24px;
+  }
+  .lighting-switch svg {
+    width: 12px;
+    height: 12px;
+  }
+  .minimap {
+    display: none;
+  }
+  .enriched-card {
+    top: auto;
+    left: 17px;
+    right: auto;
+    bottom: 110px;
+    width: calc(100% - 78px);
+    max-width: 350px;
+    max-height: 48%;
+  }
+  .place-visual {
+    height: 95px;
+  }
+  .place-visual > .landscape-art {
+    object-position: center 65%;
+    height: 150px;
+    top: -28px;
+  }
+  .place-visual > .place-card-meta {
+    padding: 10px 12px;
+  }
+  .visual-edition {
+    bottom: 5px;
+    left: 12px;
+    font-size: 5px;
+  }
+  .enriched-card .place-card-content {
+    padding: 12px 15px 0;
+  }
+  .place-title-row h3 {
+    font-size: 23px;
+    margin: 5px 0;
+  }
+  .enriched-card .detail-subtitle {
+    font-size: 7px;
+    margin-bottom: 10px;
+  }
+  .landscape-feature-tags {
+    margin-bottom: 10px;
+  }
+  .landscape-feature-tags > span {
+    font-size: 6px;
+    padding: 3px 5px;
+  }
+  .inspect-place-button {
+    padding: 9px;
+    font-size: 8px;
+  }
+  .landscape-heading {
+    font-size: 11px;
+    margin-top: 16px;
+  }
+  .enriched-card .place-card-content > p:not(.detail-subtitle) {
+    font-size: 9px;
+  }
+  .closeup-location {
+    top: 60px;
+    left: 50%;
+    padding: 8px 11px;
+    gap: 8px;
+  }
+  .closeup-location > span {
+    font-size: 7px;
+  }
+  .closeup-location strong {
+    font-size: 11px;
+  }
+  .inspecting .map-heading {
+    display: none;
+  }
+  .motion-toggle {
+    bottom: 109px;
+    left: 19px;
+    right: auto;
+  }
+  .motion-toggle > span {
+    display: inline;
+    font-size: 7px;
+  }
+  .scenic-grid > button > span {
+    font-size: 11px;
+    padding: 9px 9px 0;
+  }
+  .scenic-grid > button > small {
+    font-size: 7px;
+    padding-left: 9px;
+  }
+  .scenic-heading small {
+    display: inline;
+  }
+  .enriched-card ~ .motion-toggle {
+    display: none;
+  }
+  .bottom-toolbar {
+    padding: 5px 6px;
+  }
+  .bottom-toolbar > button {
+    padding: 6px 7px;
+  }
+  .bottom-toolbar .toolbar-divider {
+    margin: 0 3px;
+  }
+}
+@media (max-width: 440px) {
+  .map-location > span:first-of-type {
+    display: none;
+  }
+  .map-location > svg {
+    display: none;
+  }
+  .map-location {
+    gap: 4px;
+  }
+  .lighting-switch button {
+    width: 21px;
+  }
+  .view-mode > button {
+    padding: 6px 7px;
+  }
+  .bottom-toolbar > button {
+    gap: 4px;
+    padding: 6px;
+  }
+  .bottom-toolbar {
+    gap: 0;
+  }
+}
