@@ -1,0 +1,112 @@
+export type Realm = 'human' | 'spirit' | 'celestial';
+export type PlaceKind = 'mountain' | 'settlement' | 'ruin' | 'water';
+export type Point = [number, number];
+export interface Region {
+  id: string; name: string; en: string; realm: Realm; center: Point;
+  label: Point; color: string; terrain: string; description: string; water?: boolean;
+  source: string;
+}
+export interface Place {
+  id: string; name: string; region: string; realm: Realm; position: Point;
+  kind: PlaceKind; subtitle: string; description: string; source: string;
+  related?: string[]; schematic?: boolean;
+}
+
+export const realms: { id: Realm; name: string; en: string; subtitle: string }[] = [
+  { id: 'human', name: '人界', en: 'THE MORTAL REALM', subtitle: '五洲四海，山川相望' },
+  { id: 'spirit', name: '灵界', en: 'THE HIDDEN REALM', subtitle: '三十六洞天，浮岛相连' },
+  { id: 'celestial', name: '仙界', en: 'THE CELESTIAL REALM', subtitle: '九重天阙，云上诸城' },
+];
+
+export const regions: Region[] = [
+  { id: 'central', name: '中洲', en: 'CENTRAL LANDS', realm: 'human', center: [0, 2], label: [-2, 6], color: '#b29c6d', terrain: '平原 · 山脉', description: '五洲腹地，平原与昆仑山脉相接。向北是悬空孤峰，向东连接青崖山一带，南缘与南洲接壤。', source: '世界格局 §1.1 · 地域记载 §2.5、§2.8' },
+  { id: 'east', name: '东洲', en: 'EASTERN LANDS', realm: 'human', center: [34, 3], label: [40, 17], color: '#7b9d7c', terrain: '丘陵 · 河谷', description: '青牛村与故商族旧地所在之洲。青崖山位于东洲与中洲交界，南部有隐秘山谷，东望三仙岛。', source: '世界格局 §1.1 · 地域记载 §2.6、§2.10' },
+  { id: 'south', name: '南洲', en: 'SOUTHERN LANDS', realm: 'human', center: [9, 31], label: [11, 35], color: '#769575', terrain: '峰峦 · 南部平原', description: '断剑峰立于南洲；大炎疆域在南洲与中洲接壤处，连朝位于南洲南部。再向南，是广阔的南海。', source: '地域记载 §2.5、§2.8' },
+  { id: 'west', name: '西洲', en: 'WESTERN LANDS', realm: 'human', center: [-34, 8], label: [-35, 14], color: '#b3a080', terrain: '荒原 · 深渊', description: '无尽渊海深藏于西洲，魔渊位于其下。西洲与北洲的交界处横亘着万葬岭。', source: '地域记载 §2.7' },
+  { id: 'north', name: '北洲', en: 'NORTHERN LANDS', realm: 'human', center: [-5, -26], label: [4, -26], color: '#a5b6b1', terrain: '雪域 · 高山', description: '北方雪域，山岭绵延。北洲雪关与中洲北缘的悬空孤峰，是纲要中明确出现的北地地标。', source: '地域记载 §2.2、§2.5 · 第六卷' },
+  { id: 'east-sea', name: '东海', en: 'EASTERN SEA', realm: 'human', center: [61, -7], label: [58, -12], color: '#639d9b', terrain: '外海 · 群岛', water: true, description: '四海之一。三仙岛与蓬莱位于东海，东海龙宫也是纲要明确记载的海中地标。', source: '地域记载 §2.5、§2.9' },
+  { id: 'south-sea', name: '南海', en: 'SOUTHERN SEA', realm: 'human', center: [32, 47], label: [34, 46], color: '#639d9b', terrain: '海域', water: true, description: '四海之一。纲要记载此处与人界商贸联系密切，但没有给出港口名称、航线或海域边界。', source: '地域记载 §2.9' },
+  { id: 'longjin', name: '龙津海', en: 'LONGJIN SEA', realm: 'human', center: [-47, 32], label: [-47, 33], color: '#639d9b', terrain: '海域 · 海眼', water: true, description: '四海之一。海底有古老火脉与海眼，沿岸分布城镇。纲要未确定它相对于五洲的精确方位，图中位置为制图示意。', source: '地域记载 §2.9 · 第六卷', },
+  { id: 'chaoxi', name: '朝夕池', en: 'TIDAL POOL', realm: 'human', center: [-45, -28], label: [-49, -30], color: '#639d9b', terrain: '海域', water: true, description: '四海之一。保留着古老潮汐的记载。原稿未明确水域形状、尺度和相对方位，此处布局为示意。', source: '地域记载 §2.9' },
+  { id: 'caves', name: '三十六洞天', en: 'THIRTY-SIX SANCTUARIES', realm: 'spirit', center: [0, 0], label: [0, -3], color: '#86a79a', terrain: '洞天群 · 跨界连接', description: '三十六个大小不一的洞天世界，位于人界与仙界之间。纲要没有逐一命名；图中编号仅用于浏览，不代表正史名称或空间次序。', source: '三界与诸界 §1.1.1' },
+  { id: 'palace', name: '九重天阙', en: 'THE NINEFOLD HEAVENS', realm: 'celestial', center: [0, 0], label: [0, -8], color: '#b6a87f', terrain: '天阙 · 五城十二楼', description: '仙界中央区域由五座主城与十二座天楼共同构成，统称天阙。九重为总体结构，五城与十二楼是中央区域的地理构成，并非九块独立大陆。', source: '世界格局 §1.1 · 第七卷' },
+  { id: 'outer', name: '天阙之外', en: 'BEYOND THE HEAVENS', realm: 'celestial', center: [-28, 15], label: [-35, 27], color: '#92a8a6', terrain: '边城 · 遗落天域', description: '月渡、照川、废弃天域与九天遗址构成纲要中已知的外围地点。彼此精确距离与方位尚未确定，图中用独立地块表示。', source: '第七至第十卷' },
+];
+
+export const places: Place[] = [
+  { id: 'kunlun', name: '昆仑', region: 'central', realm: 'human', position: [-5, -1], kind: 'mountain', subtitle: '中洲 · 昆仑山脉', description: '位于中洲昆仑山脉。峰峦与中洲平原相接，是中洲重要的山地地标。', source: '地域记载 §2.5', related: ['taiyuan', 'tianji'] },
+  { id: 'taiyuan', name: '太渊皇朝', region: 'central', realm: 'human', position: [6, 11], kind: 'settlement', subtitle: '中洲 · 平原腹地', description: '立于中洲平原，境内拥有大规模矿脉与贯通各地的运输通道。图中仅表示疆域所在，不代表都城的精确位置。', source: '地域记载 §2.8', schematic: true },
+  { id: 'tianji', name: '悬空孤峰', region: 'central', realm: 'human', position: [3, -12], kind: 'mountain', subtitle: '中洲与北洲交界 · 天机所在地', description: '位于中洲与北洲交界处的悬空孤峰，天机坐落于此。图中以独立高峰表示这一跨洲地标。', source: '地域记载 §2.5', related: ['kunlun', 'snow-pass'] },
+  { id: 'lingxu', name: '灵墟洞天', region: 'east', realm: 'human', position: [22, 1], kind: 'mountain', subtitle: '东洲与中洲交界 · 青崖山', description: '山门立于青崖山，山下分布村落与水渠，通往山门的是三百七十二级青苔古路。这里是人界的一处山门，并非灵界三十六洞天之一的已确认名称。', source: '地域记载 §2.6 · 第一、二卷', related: ['qingniu', 'qingya'] },
+  { id: 'qingya', name: '青崖山', region: 'east', realm: 'human', position: [21, -6], kind: 'mountain', subtitle: '东洲与中洲交界 · 山地', description: '灵墟山门所在。山下有水渠与村落，古路沿青苔石阶向上延伸。', source: '地域记载 §2.6 · 第一、二卷', related: ['lingxu', 'qingniu'] },
+  { id: 'qingniu', name: '青牛村', region: 'east', realm: 'human', position: [31, 10], kind: 'settlement', subtitle: '东洲 · 乡野聚落', description: '位于东洲的村落，周边有田地、渔水、旧水渠与枯桑。可由此跋涉前往青崖山；原稿未给出两地距离。', source: '人物出处 §2.1 · 第一卷', related: ['lingxu'] },
+  { id: 'zhou', name: '周皇朝', region: 'east', realm: 'human', position: [40, 0], kind: 'settlement', subtitle: '东洲 · 皇朝疆域', description: '立于东洲，疆域内有农业土地与地方聚落。此标记代表皇朝所在区域，原稿没有指定都城名称。', source: '地域记载 §2.8', schematic: true },
+  { id: 'shang', name: '故商族旧地', region: 'east', realm: 'human', position: [35, -10], kind: 'ruin', subtitle: '东洲 · 古代遗址', description: '商族旧地位于东洲，枯禅寺坐落于其边缘。古简与旧址散布其间，疆域轮廓未在纲要中确定。', source: '地域记载 §2.7 · 玄鸟引', related: ['kuchan'] },
+  { id: 'kuchan', name: '枯禅寺', region: 'east', realm: 'human', position: [44, -6], kind: 'ruin', subtitle: '东洲 · 故商族旧地边缘', description: '位于故商族旧地边缘，寺内有封存的白骨塔。地图只记录寺院的位置关系。', source: '地域记载 §2.7', related: ['shang'] },
+  { id: 'su-valley', name: '苏氏山谷', region: 'east', realm: 'human', position: [37, 18], kind: 'mountain', subtitle: '东洲南部 · 隐秘山谷', description: '苏家所在的东洲南部隐秘山谷。原稿没有给出谷名，“苏氏山谷”为便于检索采用的地理描述。', source: '地域记载 §2.10', schematic: true },
+  { id: 'duanjian', name: '断剑峰', region: 'south', realm: 'human', position: [1, 27], kind: 'mountain', subtitle: '南洲 · 紫霄所在地', description: '位于南洲，紫霄坐落于此。以突出的山峰形态在地图上标示。', source: '地域记载 §2.5', related: ['dayan', 'lian'] },
+  { id: 'dayan', name: '大炎皇朝', region: 'south', realm: 'human', position: [11, 20], kind: 'settlement', subtitle: '南洲与中洲接壤处', description: '疆域位于南洲与中洲接壤地带。此处标注表示皇朝所处区域，原稿未确定国界与都城。', source: '地域记载 §2.8', schematic: true },
+  { id: 'lian', name: '连朝', region: 'south', realm: 'human', position: [11, 39], kind: 'settlement', subtitle: '南洲南部 · 皇朝疆域', description: '立于南洲南部。与北部接壤地带的大炎形成明确的南北位置关系，边界与都城尚未确定。', source: '地域记载 §2.8', schematic: true },
+  { id: 'wujin', name: '无尽渊海', region: 'west', realm: 'human', position: [-36, 4], kind: 'water', subtitle: '西洲 · 内陆渊海', description: '位于西洲，魔渊藏于其下。渊下有三十六渊穴；它们与灵界三十六洞天是不同的地理结构。', source: '地域记载 §2.7', related: ['moyuan'] },
+  { id: 'moyuan', name: '魔渊', region: 'west', realm: 'human', position: [-34, 10], kind: 'ruin', subtitle: '西洲 · 无尽渊海之下', description: '无尽渊海下方的渊域。地图将地下地点投影至地表附近，方便点选，并非另一处海面城池。', source: '地域记载 §2.7', related: ['wujin'] },
+  { id: 'wanzang', name: '万葬岭', region: 'west', realm: 'human', position: [-26, -11], kind: 'mountain', subtitle: '北洲与西洲交界 · 赤霞谷所在地', description: '横亘北洲与西洲交界的山岭，赤霞谷位于此地。', source: '地域记载 §2.7', related: ['snow-pass'] },
+  { id: 'snow-pass', name: '北洲雪关', region: 'north', realm: 'human', position: [-8, -19], kind: 'settlement', subtitle: '北洲 · 雪域关隘', description: '位于北洲的雪关，是纲要中明确出现的通行关隘。准确关道与对外路线未在原稿中给出。', source: '第六卷 · 北洲雪关', schematic: true },
+  { id: 'penglai', name: '蓬莱', region: 'east-sea', realm: 'human', position: [57, -1], kind: 'mountain', subtitle: '东海 · 三仙岛之首', description: '位于东海三仙岛之首。地图保留一座主岛与两座小岛，后两岛原稿未命名。', source: '地域记载 §2.5', related: ['east-palace'] },
+  { id: 'east-palace', name: '东海龙宫', region: 'east-sea', realm: 'human', position: [62, 12], kind: 'settlement', subtitle: '东海 · 海中宫域', description: '坐落于东海的宫域。标记以海面投影呈现水下地标，不表示建筑露出海面。', source: '地域记载 §2.9', schematic: true },
+  { id: 'sea-eye', name: '龙津海眼', region: 'longjin', realm: 'human', position: [-43, 26], kind: 'water', subtitle: '龙津海 · 海底地标', description: '第六卷出现的龙津海眼。周边存在古老海底火脉；精确方位、深度和尺度未定，图中采用海面投影。', source: '第六卷 · 龙津海灾变', schematic: true },
+  { id: 'tidal', name: '朝夕池水域', region: 'chaoxi', realm: 'human', position: [-46, -24], kind: 'water', subtitle: '四海之一 · 潮汐水域', description: '朝夕池属于四海。纲要未确定岛屿或城池，地图保留为可点选水域，不补写新的地名。', source: '地域记载 §2.9', schematic: true },
+  { id: 'south-water', name: '南海水域', region: 'south-sea', realm: 'human', position: [30, 44], kind: 'water', subtitle: '四海之一 · 南方海域', description: '南方海域。纲要未明确具体港口及岛屿，此处保留水域标记。', source: '地域记载 §2.9', schematic: true },
+  { id: 'tianque', name: '天阙五城', region: 'palace', realm: 'celestial', position: [0, 0], kind: 'settlement', subtitle: '仙界中央 · 五座主城', description: '五座主城构成天阙中枢。原稿未给出五城名称，地图以五个城台示意，不能将月渡与照川直接视为五城之一。', source: '第七卷 · 天阙审查', related: ['twelve', 'qizheng'] },
+  { id: 'twelve', name: '十二天楼', region: 'palace', realm: 'celestial', position: [12, -3], kind: 'settlement', subtitle: '天阙 · 环列十二楼', description: '与五座主城共同构成仙界中央区域。楼名、准确排列方式与间距未定，环列形态为视觉示意。', source: '第七卷', schematic: true, related: ['tianque'] },
+  { id: 'qizheng', name: '七政院', region: 'palace', realm: 'celestial', position: [-10, 5], kind: 'settlement', subtitle: '仙界 · 地点标记', description: '纲要记载的仙界机构所在地。具体位于哪一座主城、与其他城域的相对方位尚未确定，此处暂置于天阙区域。', source: '第七至第九卷', schematic: true },
+  { id: 'yuedu', name: '月渡城', region: 'outer', realm: 'celestial', position: [-31, 4], kind: 'settlement', subtitle: '仙界 · 边城', description: '第八卷出现的仙界边城。原稿明确其边城性质，未明确相对于天阙的方位。', source: '第八卷', schematic: true, related: ['zhaochuan'] },
+  { id: 'zhaochuan', name: '照川仙城', region: 'outer', realm: 'celestial', position: [31, 17], kind: 'settlement', subtitle: '仙界 · 上城、中城、川下十三坊', description: '建立在法则井之上的仙城，分为上城、中城与川下十三坊。城市以垂直分层结构在地图中呈现；相对方位为示意。', source: '第九卷 · 照川仙城结构', related: ['well', 'yuedu'], schematic: true },
+  { id: 'well', name: '引律井', region: 'outer', realm: 'celestial', position: [-27, -21], kind: 'ruin', subtitle: '废弃天域下方 · 古代设施', description: '第七卷记载于废弃天域下方的古井。地图采用地表投影，标示其与废弃天域的空间联系。', source: '第七卷', related: ['abandoned'], schematic: true },
+  { id: 'abandoned', name: '废弃天域', region: 'outer', realm: 'celestial', position: [-36, -18], kind: 'ruin', subtitle: '仙界 · 废弃地块', description: '第七卷出现的废弃天域，古老引律井位于其下方。原稿没有给出正式域名。', source: '第七卷', related: ['well'], schematic: true },
+  { id: 'jiutian', name: '九天遗址', region: 'outer', realm: 'celestial', position: [30, -21], kind: 'ruin', subtitle: '仙界 · 失落天域', description: '第十卷中重现的一处失落天域，保存古代战场遗址。名称不表示它就是九重天的第九层。', source: '第十卷', schematic: true },
+  ...Array.from({ length: 36 }, (_, i): Place => {
+    const row = Math.floor(i / 6), col = i % 6;
+    return { id: `cave-${i + 1}`, name: `洞天 ${String(i + 1).padStart(2, '0')}`, region: 'caves', realm: 'spirit', position: [(col - 2.5) * 17 + Math.sin(row * 2 + col) * 3, (row - 2.5) * 13 + Math.cos(col * 2) * 2], kind: 'mountain', subtitle: '灵界 · 未定名洞天', description: '三十六洞天之一。洞天连接人界与仙界，大小各异，部分有人居住，部分荒废。原稿未逐一命名，也未明确各洞天坐标和相连顺序；编号与岛形仅供地图浏览。', source: '三界与诸界 §1.1.1', schematic: true };
+  }),
+];
+
+export const kindLabels: Record<PlaceKind, string> = { mountain: '山川地标', settlement: '城池聚落', ruin: '古迹遗址', water: '海域水文' };
+
+export interface Land {
+  id: string; region: string; points: Point[]; color: string;
+  peaks: [number, number, number, number][];
+}
+
+export const humanLands: Land[] = [
+  { id: 'north', region: 'north', color: '#bac8bb', points: [[-27,-16],[-32,-24],[-26,-29],[-28,-34],[-17,-35],[-11,-41],[-1,-38],[8,-41],[14,-34],[23,-35],[27,-27],[20,-22],[22,-16],[12,-14],[7,-11],[-3,-14],[-13,-12],[-18,-17]], peaks: [[-17,-26,8,5],[-10,-29,10,5],[-2,-26,12,5],[5,-23,9,4],[11,-21,6,4]] },
+  { id: 'west', region: 'west', color: '#b8aa85', points: [[-54,-6],[-48,-12],[-40,-10],[-34,-15],[-27,-12],[-25,-5],[-20,-2],[-23,8],[-19,15],[-25,19],[-29,25],[-38,23],[-43,28],[-49,20],[-57,16],[-55,8],[-61,3]], peaks: [[-29,-9,6,4],[-33,-3,6,3],[-48,4,5,5],[-44,15,6,4],[-31,18,4,3]] },
+  { id: 'central', region: 'central', color: '#c1b88b', points: [[-19,-6],[-13,-11],[-5,-9],[1,-12],[9,-8],[15,-8],[18,-2],[15,5],[19,11],[12,16],[5,19],[-2,14],[-11,17],[-15,10],[-22,8],[-19,2],[-23,-1]], peaks: [[-13,-4,6,4],[-8,-3,9,4],[-3,-1,10,4],[2,0,6,3],[7,-5,5,4],[-11,8,3,4]] },
+  { id: 'east', region: 'east', color: '#9cb395', points: [[21,-7],[26,-13],[34,-15],[40,-11],[47,-14],[52,-7],[49,-2],[55,3],[51,8],[54,13],[48,17],[46,23],[38,22],[34,26],[29,20],[24,19],[25,12],[19,9],[21,3],[18,0]], peaks: [[23,-3,7,3],[28,-6,6,4],[34,-8,4,4],[43,-4,6,4],[40,13,5,4],[35,18,6,3]] },
+  { id: 'south', region: 'south', color: '#9baf86', points: [[-6,21],[1,18],[7,23],[15,18],[21,23],[20,29],[27,32],[22,39],[24,44],[15,48],[10,45],[4,49],[-2,43],[-7,44],[-10,36],[-7,30],[-12,26]], peaks: [[-4,27,8,4],[0,30,9,3],[4,32,7,4],[16,29,4,5],[12,41,4,4]] },
+  { id: 'penglai', region: 'east-sea', color: '#b2c5a1', points: [[53,-3],[56,-6],[60,-4],[62,0],[59,4],[55,3],[53,0]], peaks: [[57,-1,5,2]] },
+  { id: 'island-2', region: 'east-sea', color: '#b2c5a1', points: [[62,-8],[65,-10],[67,-7],[65,-4],[62,-5]], peaks: [[64,-7,3,1.4]] },
+  { id: 'island-3', region: 'east-sea', color: '#b2c5a1', points: [[63,4],[65,2],[68,4],[67,7],[64,7]], peaks: [[65,4,2,1.3]] },
+];
+
+export const celestialLands: Land[] = [
+  { id: 'palace', region: 'palace', color: '#d5cba8', points: [[-19,-10],[-13,-18],[-2,-17],[8,-20],[20,-12],[23,-3],[18,8],[10,14],[-2,16],[-14,12],[-22,1]], peaks: [[0,-9,3,7]] },
+  { id: 'yuedu', region: 'outer', color: '#b2bdb0', points: [[-42,-1],[-34,-6],[-25,-3],[-22,4],[-26,12],[-38,13],[-45,6]], peaks: [[-37,3,3,5]] },
+  { id: 'zhaochuan', region: 'outer', color: '#c4bd9b', points: [[23,10],[30,8],[39,14],[42,21],[34,27],[25,25],[21,18]], peaks: [[31,17,4,6]] },
+  { id: 'abandoned', region: 'outer', color: '#a6afb0', points: [[-47,-22],[-42,-29],[-32,-29],[-24,-24],[-23,-17],[-31,-12],[-41,-15]], peaks: [[-37,-21,5,4]] },
+  { id: 'jiutian', region: 'outer', color: '#c0b7ac', points: [[23,-27],[33,-30],[42,-26],[44,-18],[38,-11],[29,-12],[22,-18]], peaks: [[32,-22,6,5]] },
+];
+
+export const rivers: Point[][] = [
+  [[3,-29],[6,-24],[4,-19],[10,-15],[14,-17],[19,-16]],
+  [[-5,-1],[-2,3],[3,5],[6,9],[13,10],[16,13]],
+  [[28,-6],[30,-1],[35,2],[32,8],[34,12],[31,16],[33,22]],
+  [[0,28],[5,30],[7,36],[14,37],[18,43],[16,46]],
+  [[-45,2],[-40,4],[-38,9],[-33,12],[-31,18],[-28,21]],
+];
+
+// These are geographic connections described in the outline, not measured roads.
+export const connections: { from: string; to: string }[] = [
+  { from: 'qingniu', to: 'lingxu' }, { from: 'lingxu', to: 'qingya' },
+  { from: 'shang', to: 'kuchan' }, { from: 'wujin', to: 'moyuan' },
+  { from: 'abandoned', to: 'well' }, { from: 'tianque', to: 'twelve' },
+];
