@@ -1242,7 +1242,15 @@ export class AtlasScene {
       );
       this.camera.updateProjectionMatrix();
       this.handleChange();
-      if (t >= 1) this.tween = undefined;
+      if (t >= 1) {
+        this.tween = undefined;
+        // Always publish the final value, even when the last easing step is
+        // smaller than the change-event threshold (e.g. 449% -> 450%).
+        this.lastZoom = this.camera.zoom;
+        this.callbacks.zoom(this.camera.zoom);
+        this.applyVisibility();
+        this.notifyViewport(true);
+      }
     }
     if (this.selectionRing.visible) {
       const s = 1 + Math.sin(this.elapsed * 1.6) * 0.08;
